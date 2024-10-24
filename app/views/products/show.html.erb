@@ -2,7 +2,6 @@
   <header class="page-header">
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
   </header>
-
   <article class="product-detail">
     <%= image_tag @product.image.url, class: 'main-img' %>
     <div>
@@ -19,5 +18,4 @@
       </div>
     </div>
   </article>
-
 </section>
