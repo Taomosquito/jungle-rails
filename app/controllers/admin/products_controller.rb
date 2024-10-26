@@ -1,4 +1,5 @@
 class Admin::ProductsController < ApplicationController
+  before_action :authenticate
 
   def index
     @products = Product.order(id: :desc).all
@@ -25,6 +26,10 @@ class Admin::ProductsController < ApplicationController
   end
 
   private
+
+  def authenticate
+    self.class.http_basic_authenticate_with name: ENV['USERNAME'], password: ENV['PASSWORD']
+  end
 
   def product_params
     params.require(:product).permit(
