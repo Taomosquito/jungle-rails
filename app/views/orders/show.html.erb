@@ -1,4 +1,40 @@
 <section class="orders-show">
+  <header class="page-header">
+    <h1><u>Order Total:</u> <%= humanized_money_with_symbol(@order.total_cents.to_f / 100.00) %></h1>
+    <h1><u>Created At:</u> <%= @order.created_at %></h1>
+    <h1><u>Updated At:</u> <%= @order.updated_at %></h1>
+    <h1><u>Email:</u> <%= @order.email %></h1>
+  </header>
+
+  <h2>Line Items</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>|Product|</th>
+        <th>|Image|</th>
+        <th>|Quantity|</th>
+        <th>|Item Price|</th>
+        <th>|Total Price|</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @line_items.each do |line_item| %>
+        <tr>
+          <td><%= line_item.product.name %></td>
+          <td>
+            <% if line_item.product.image.present? %>
+              <%= image_tag line_item.product.image.url, alt:line_item.product.name, width: 40, height: 40 %>
+            <% else %>
+              No image available
+            <% end %>
+          </td>
+          <td><%= line_item.quantity %></td>
+          <td><%= line_item.item_price.round(2) %></td>
+          <td><%= line_item.total_price.round(2) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
@@ -7,7 +43,4 @@
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
   </div>
-
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
-
 </section>

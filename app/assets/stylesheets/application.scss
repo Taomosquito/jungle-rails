@@ -111,3 +111,9 @@ form.button_to {
 .text-danger {
   color: #f38792 !important;
 }
+
+// custom css to address overwhelming image size issue.
+.custom-img {
+  max-width: 2px;
+  height: auto;
+}
