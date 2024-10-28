@@ -17,6 +17,13 @@
     <%= yield %>
   </main>
 
+<% if current_user %>
+  Signed in as <%= current_user.email %> |
+  <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+<% else %>
+  <%= link_to 'Login', new_session_path %> | 
+  <%= link_to 'Signup', new_user_path %>
+<% end %>
   <%= yield :end_of_body %>
 
   <footer class="py-3 my-4">
